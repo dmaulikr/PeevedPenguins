@@ -15,6 +15,8 @@
 		57845E4B1F0FD07400DB9C54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57845E491F0FD07400DB9C54 /* Main.storyboard */; };
 		57845E4D1F0FD07400DB9C54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 57845E4C1F0FD07400DB9C54 /* Assets.xcassets */; };
 		57845E501F0FD07400DB9C54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 57845E4E1F0FD07400DB9C54 /* LaunchScreen.storyboard */; };
+		57845E581F0FD17100DB9C54 /* assets.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 57845E571F0FD17100DB9C54 /* assets.atlas */; };
+		57845E5A1F0FD25300DB9C54 /* Bear.sks in Resources */ = {isa = PBXBuildFile; fileRef = 57845E591F0FD25300DB9C54 /* Bear.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		57845E4C1F0FD07400DB9C54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		57845E4F1F0FD07400DB9C54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		57845E511F0FD07400DB9C54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		57845E571F0FD17100DB9C54 /* assets.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = assets.atlas; sourceTree = "<group>"; };
+		57845E591F0FD25300DB9C54 /* Bear.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Bear.sks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +48,7 @@
 		57845E331F0FD07400DB9C54 = {
 			isa = PBXGroup;
 			children = (
+				57845E591F0FD25300DB9C54 /* Bear.sks */,
 				57845E3E1F0FD07400DB9C54 /* PeevedPenguins */,
 				57845E3D1F0FD07400DB9C54 /* Products */,
 			);
@@ -66,6 +71,7 @@
 				57845E451F0FD07400DB9C54 /* GameScene.swift */,
 				57845E471F0FD07400DB9C54 /* GameViewController.swift */,
 				57845E491F0FD07400DB9C54 /* Main.storyboard */,
+				57845E571F0FD17100DB9C54 /* assets.atlas */,
 				57845E4C1F0FD07400DB9C54 /* Assets.xcassets */,
 				57845E4E1F0FD07400DB9C54 /* LaunchScreen.storyboard */,
 				57845E511F0FD07400DB9C54 /* Info.plist */,
@@ -132,8 +138,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				57845E5A1F0FD25300DB9C54 /* Bear.sks in Resources */,
 				57845E4B1F0FD07400DB9C54 /* Main.storyboard in Resources */,
 				57845E421F0FD07400DB9C54 /* GameScene.sks in Resources */,
+				57845E581F0FD17100DB9C54 /* assets.atlas in Resources */,
 				57845E4D1F0FD07400DB9C54 /* Assets.xcassets in Resources */,
 				57845E501F0FD07400DB9C54 /* LaunchScreen.storyboard in Resources */,
 				57845E441F0FD07400DB9C54 /* Actions.sks in Resources */,
