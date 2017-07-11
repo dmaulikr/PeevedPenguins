@@ -22,6 +22,7 @@
 		578BB64C1F0FFD6D00F3B613 /* MainMenu.sks in Resources */ = {isa = PBXBuildFile; fileRef = 578BB64B1F0FFD6D00F3B613 /* MainMenu.sks */; };
 		578BB64E1F0FFDC000F3B613 /* MSButtonNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578BB64D1F0FFDC000F3B613 /* MSButtonNode.swift */; };
 		578BB6501F0FFE2200F3B613 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578BB64F1F0FFE2200F3B613 /* MainMenu.swift */; };
+		578BB6521F13CE6E00F3B613 /* Poof.sks in Resources */ = {isa = PBXBuildFile; fileRef = 578BB6511F13CE6E00F3B613 /* Poof.sks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,8 @@
 		578BB64B1F0FFD6D00F3B613 /* MainMenu.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; name = MainMenu.sks; path = ../MainMenu.sks; sourceTree = "<group>"; };
 		578BB64D1F0FFDC000F3B613 /* MSButtonNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MSButtonNode.swift; sourceTree = "<group>"; };
 		578BB64F1F0FFE2200F3B613 /* MainMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenu.swift; path = ../MainMenu.swift; sourceTree = "<group>"; };
+		578BB6511F13CE6E00F3B613 /* Poof.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Poof.sks; sourceTree = "<group>"; };
+		578BB6531F13CF8000F3B613 /* sfx_seal.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = sfx_seal.caf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +81,10 @@
 				57845E591F0FD25300DB9C54 /* Bear.sks */,
 				57845E3F1F0FD07400DB9C54 /* AppDelegate.swift */,
 				57845E411F0FD07400DB9C54 /* Level_1.sks */,
+				578BB6511F13CE6E00F3B613 /* Poof.sks */,
 				57845E431F0FD07400DB9C54 /* Actions.sks */,
 				57845E451F0FD07400DB9C54 /* GameScene.swift */,
+				578BB6531F13CF8000F3B613 /* sfx_seal.caf */,
 				57845E471F0FD07400DB9C54 /* GameViewController.swift */,
 				578BB64D1F0FFDC000F3B613 /* MSButtonNode.swift */,
 				578BB6491F0FFB2E00F3B613 /* Penguin.swift */,
@@ -156,6 +161,7 @@
 				57845E5A1F0FD25300DB9C54 /* Bear.sks in Resources */,
 				578BB64C1F0FFD6D00F3B613 /* MainMenu.sks in Resources */,
 				57845E5C1F0FF8DB00DB9C54 /* CharacterActions.sks in Resources */,
+				578BB6521F13CE6E00F3B613 /* Poof.sks in Resources */,
 				57845E4B1F0FD07400DB9C54 /* Main.storyboard in Resources */,
 				57845E421F0FD07400DB9C54 /* Level_1.sks in Resources */,
 				57845E581F0FD17100DB9C54 /* assets.atlas in Resources */,

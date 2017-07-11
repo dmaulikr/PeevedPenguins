@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class GameScene: SKScene {
+class GameScene: SKScene,SKPhysicsContactDelegate {
     
     //Vars
     var cameraNode:SKCameraNode!
@@ -24,7 +24,11 @@ class GameScene: SKScene {
 
     var touchJoint: SKPhysicsJointSpring?
     
+    
+    
     override func didMove(to view: SKView) {
+        //set physics contact delegate
+        physicsWorld.contactDelegate = self
         /* Set reference to catapultArm node */
         catapultArm = childNode(withName: "catapultArm") as! SKSpriteNode
         
@@ -49,11 +53,29 @@ class GameScene: SKScene {
                 print("Level 1 is missing")
                 return
             }
-            scene.scaleMode = .aspectFill
+            scene.scaleMode = .aspectFit
             view.presentScene(scene)
         }
         setupCatapult()
         
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        /* Physics contact delegate implementation */
+        /* Get references to the bodies involved in the collision */
+        let contactA:SKPhysicsBody = contact.bodyA
+        let contactB:SKPhysicsBody = contact.bodyB
+        /* Get references to the physics body parent SKSpriteNode */
+        let nodeA = contactA.node as! SKSpriteNode
+        let nodeB = contactB.node as! SKSpriteNode
+        /* Check if either physics bodies was a seal */
+        if contactA.categoryBitMask == 2 || contactB.categoryBitMask == 2 {
+            if contact.collisionImpulse > 2.0 {
+                /* Kill Seal */
+                if contactA.categoryBitMask == 2 { removeSeal(node: nodeA) }
+                if contactB.categoryBitMask == 2 { removeSeal(node: nodeB) }
+            }
+        }
     }
     
     func setupCatapult() {
@@ -75,6 +97,49 @@ class GameScene: SKScene {
         physicsWorld.add(catapultSpringJoint)
         catapultSpringJoint.frequency = 6
         catapultSpringJoint.damping = 0.5
+    }
+    
+    func removeSeal(node: SKNode) {
+        /* Load our particle effect */
+        let particles = SKEmitterNode(fileNamed: "Poof")!
+        /* Position particles at the Seal node
+         If you've moved Seal to an sks, this will need to be
+         node.convert(node.position, to: self), not node.position */
+        particles.position = node.position
+        /* Add particles to scene */
+        addChild(particles)
+        let wait = SKAction.wait(forDuration: 5)
+        let removeParticles = SKAction.removeFromParent()
+        let seq = SKAction.sequence([wait, removeParticles])
+        particles.run(seq)
+        
+        /* Play SFX */
+        let sound = SKAction.playSoundFileNamed("sfx_seal", waitForCompletion: false)
+        self.run(sound)
+        
+        /* Seal death*/
+        /* Create our hero death action */
+        let sealDeath = SKAction.run({
+            /* Remove seal node from scene */
+            node.removeFromParent()
+        })
+        self.run(sealDeath)
+    }
+    
+    func checkPenguin() {
+        guard let cameraTarget = cameraTarget else {
+            return
+        }
+        
+        /* Check penguin has come to rest */
+        if cameraTarget.physicsBody!.joints.count == 0 && cameraTarget.physicsBody!.velocity.length() < 0.18 {
+            resetCamera()
+        }
+        
+        if cameraTarget.position.y < -200 {
+            cameraTarget.removeFromParent()
+            resetCamera()
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -136,6 +201,7 @@ class GameScene: SKScene {
     override func update(_ currentTime: CFTimeInterval) {
         /* Called before each frame is rendered */
         moveCamera()
+        checkPenguin()
     }
     
     /* Make a Class method to load levels */
@@ -143,7 +209,7 @@ class GameScene: SKScene {
         guard let scene = GameScene(fileNamed: "Level_\(levelNumber)") else {
             return nil
         }
-        scene.scaleMode = .aspectFill
+        scene.scaleMode = .aspectFit
         return scene
     }
     
@@ -155,8 +221,23 @@ class GameScene: SKScene {
         let x = clamp(value: targetX, lower: 0, upper: 392)
         cameraNode.position.x = x
     }
+    
+    func resetCamera() {
+        /* Reset camera */
+        let cameraReset = SKAction.move(to: CGPoint(x:0, y:camera!.position.y), duration: 1.5)
+        let cameraDelay = SKAction.wait(forDuration: 0.5)
+        let cameraSequence = SKAction.sequence([cameraDelay,cameraReset])
+        cameraNode.run(cameraSequence)
+        cameraTarget = nil
+    }
 }
 
 func clamp<T: Comparable>(value: T, lower: T, upper: T) -> T {
     return min(max(value, lower), upper)
+}
+
+extension CGVector {
+    public func length() -> CGFloat {
+        return CGFloat(sqrt(dx*dx + dy*dy))
+    }
 }
