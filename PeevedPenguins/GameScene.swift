@@ -21,14 +21,26 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var penguinJoint: SKPhysicsJointPin?
     
     var cameraTarget: SKSpriteNode?
-
+    
     var touchJoint: SKPhysicsJointSpring?
+    
+    var countPenguins: Int = 0
+    
+    var penguinOne: SKSpriteNode!
+    var penguinTwo: SKSpriteNode!
+    var penguinThree: SKSpriteNode!
     
     
     
     override func didMove(to view: SKView) {
         //set physics contact delegate
         physicsWorld.contactDelegate = self
+        
+        //lives connections
+        penguinOne = childNode(withName: "penguinOne") as! SKSpriteNode
+        penguinTwo = childNode(withName: "penguinTwo") as! SKSpriteNode
+        penguinThree = childNode(withName: "penguinThree") as! SKSpriteNode
+        
         /* Set reference to catapultArm node */
         catapultArm = childNode(withName: "catapultArm") as! SKSpriteNode
         
@@ -152,16 +164,40 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
             touchJoint = SKPhysicsJointSpring.joint(withBodyA: touchNode.physicsBody!, bodyB: catapultArm.physicsBody!, anchorA: location, anchorB: location)
             physicsWorld.add(touchJoint!)
             
-            let penguin = Penguin()
-            addChild(penguin)
-            penguin.position.x += catapultArm.position.x + 20
-            penguin.position.y += catapultArm.position.y + 50
-            penguin.physicsBody?.usesPreciseCollisionDetection = true
-            penguinJoint = SKPhysicsJointPin.joint(withBodyA: catapultArm.physicsBody!,
-                                                   bodyB: penguin.physicsBody!,
-                                                   anchor: penguin.position)
-            physicsWorld.add(penguinJoint!)
-            cameraTarget = penguin
+            if countPenguins < 3 {
+                self.countPenguins += 1
+                let penguin = Penguin()
+                addChild(penguin)
+                penguin.position.x += self.catapultArm.position.x + 20
+                penguin.position.y += self.catapultArm.position.y + 50
+                penguin.physicsBody?.usesPreciseCollisionDetection = true
+                self.penguinJoint = SKPhysicsJointPin.joint(withBodyA: self.catapultArm.physicsBody!,
+                                                       bodyB: penguin.physicsBody!,
+                                                       anchor: penguin.position)
+                physicsWorld.add(self.penguinJoint!)
+                self.cameraTarget = penguin
+                
+                
+                //lives system
+                let removePenguins = SKAction.removeFromParent()
+                let seq = SKAction.sequence([removePenguins])
+                penguinThree.run(seq)
+                
+                switch countPenguins{
+                case 1:
+                    penguinThree.run(seq)
+                
+                case 2:
+                    penguinTwo.run(seq)
+                    
+                case 3:
+                    penguinOne.run(seq)
+                
+                default:
+                    print("End Game")
+              }
+            }
+            
             
         }
     }
@@ -193,7 +229,7 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         let r = catapultArm.zRotation
         let dx = cos(r) * force
         let dy = sin(r) * force
-        // Apply an impulse at the vector. 
+        // Apply an impulse at the vector.
         let v = CGVector(dx: dx, dy: dy)
         penguin.physicsBody?.applyImpulse(v)
     }
