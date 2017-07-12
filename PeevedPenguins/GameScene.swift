@@ -30,6 +30,8 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
     var penguinTwo: SKSpriteNode!
     var penguinThree: SKSpriteNode!
     
+    var scoreLabel: SKLabelNode!
+    var score: Int = 0
     
     
     override func didMove(to view: SKView) {
@@ -40,6 +42,9 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         penguinOne = childNode(withName: "penguinOne") as! SKSpriteNode
         penguinTwo = childNode(withName: "penguinTwo") as! SKSpriteNode
         penguinThree = childNode(withName: "penguinThree") as! SKSpriteNode
+        
+        //scoreLabel connection
+        scoreLabel = childNode(withName: "//scoreLabel") as! SKLabelNode
         
         /* Set reference to catapultArm node */
         catapultArm = childNode(withName: "catapultArm") as! SKSpriteNode
@@ -128,6 +133,10 @@ class GameScene: SKScene,SKPhysicsContactDelegate {
         /* Play SFX */
         let sound = SKAction.playSoundFileNamed("sfx_seal", waitForCompletion: false)
         self.run(sound)
+        
+        score += 1
+        
+        scoreLabel.text = "Score: \(score)"
         
         /* Seal death*/
         /* Create our hero death action */
